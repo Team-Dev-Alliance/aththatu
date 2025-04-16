@@ -122,3 +122,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# The test_databse I (himala) added for testing. Will make a seperate user database.
+# If multiple database needed add in this dictionary and correctly get them using dictionary indexing.
+MONGO_DB_NAME = {"test_database":"test"}
+
+MONGO_URI = "mongodb+srv://himala:random@cluster0.pf3so.mongodb.net/"
