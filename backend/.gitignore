@@ -1,0 +1,7 @@
+# Below is my(Himala) environment. If needed change the way you need it
+venv/
+
+
+*.pyc
+__pycache__/
+db.sqlite3
