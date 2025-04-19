@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables from .env file
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',#By Himala
+    'filter',#By Himala
 ]
 
 MIDDLEWARE = [
@@ -125,6 +130,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # The test_databse I (himala) added for testing. Will make a seperate user database.
 # If multiple database needed add in this dictionary and correctly get them using dictionary indexing.
-MONGO_DATABASES = {"test_database":"test","user":"user"}
+MONGO_DATABASES = {
+    "test_database": os.getenv("MONGO_TEST_DATABASE"),
+    "user": os.getenv("MONGO_USER_DATABASE"),
+    "seller": os.getenv("MONGO_SELLER_DATABASE")
+}
 
-MONGO_URI = "mongodb+srv://himala:random@cluster0.pf3so.mongodb.net/"
+MONGO_URI = os.getenv("MONGO_URI")
