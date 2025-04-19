@@ -34,7 +34,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         onTap: (index) {
           setState(() {
             _currentNavIndex = index;
-            // Handle navigation logic here
+            if (index == 1) {
+              Navigator.pushReplacementNamed(context, '/categories');
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, '/cart');
+            } else if (index == 3) {
+              Navigator.pushReplacementNamed(context, '/profile');
+            }
           });
         },
       ),
