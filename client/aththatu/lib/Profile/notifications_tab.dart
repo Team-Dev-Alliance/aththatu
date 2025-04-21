@@ -51,7 +51,7 @@ class _NotificationsTabState extends State<NotificationsTab> {
           return ListTile(
             leading: Icon(
               item.read ? Icons.notifications_none : Icons.notifications_active,
-              color: item.read ? Colors.grey : Colors.blue,
+              color: item.read ? Colors.grey : Colors.orange,
             ),
             title: Text(
               item.title,
