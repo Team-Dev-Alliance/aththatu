@@ -55,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [
+              children:  [
                 UserSettingsTab(),
                 NotificationsTab(),
                 WishlistTab(),
