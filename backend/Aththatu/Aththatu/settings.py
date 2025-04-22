@@ -133,7 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MONGO_DATABASES = {
     "test_database": os.getenv("MONGO_TEST_DATABASE"),
     "user": os.getenv("MONGO_USER_DATABASE"),
-    "seller": os.getenv("MONGO_SELLER_DATABASE")
+    "seller": os.getenv("MONGO_SELLER_DATABASE"),
+    "chatsystem": os.getenv("MONGO_CHAT_DATABASE"),
 }
 
 MONGO_URI = os.getenv("MONGO_URI")
