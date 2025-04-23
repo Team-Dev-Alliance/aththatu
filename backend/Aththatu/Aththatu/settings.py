@@ -137,6 +137,6 @@ MONGO_DATABASES = {
     "chatsystem": os.getenv("MONGO_CHAT_DATABASE"),
 }
 
-MONGO_URI = os.getenv("MONGO_URI")
-
+#MONGO_URI = os.getenv("MONGO_URI")
 MONGO_URI_Chathu = os.getenv("MONGO_URI_Chathu")
+print("DEBUG >>> MONGO_URI_Chathu:", repr(MONGO_URI_Chathu))

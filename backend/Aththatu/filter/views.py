@@ -1,4 +1,4 @@
-from utils import get_db_handle
+from backend.Aththatu.utils import get_db_handle
 import json
 from django.http import JsonResponse
 from django.conf import settings

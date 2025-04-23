@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from utils import get_db_handle
+from backend.Aththatu.utils import get_db_handle
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
