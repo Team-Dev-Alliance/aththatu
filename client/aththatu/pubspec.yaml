@@ -12,8 +12,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  fl_chart: ^0.68.0
+  fl_chart: ^0.71.0
   cupertino_icons: ^1.0.8
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

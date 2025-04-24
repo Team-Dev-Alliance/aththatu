@@ -36,7 +36,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
           setState(() {
             _currentNavIndex = index;
             if (index == 3) {
-              Navigator.pushReplacementNamed(context, '/profile');
+              Navigator.pushReplacementNamed(context, '/seller_profile');
             }
             // Handle other navigation logic
           });
