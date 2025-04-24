@@ -138,5 +138,7 @@ MONGO_DATABASES = {
 }
 
 #MONGO_URI = os.getenv("MONGO_URI")
-MONGO_URI_Chathu = os.getenv("MONGO_URI_Chathu")
-print("DEBUG >>> MONGO_URI_Chathu:", repr(MONGO_URI_Chathu))
+MONGO_URI_CHATHU=os.getenv("MONGO_URI_Chathu")
+print("DEBUG >>> MONGO_URI_Chathu:", repr(MONGO_URI_CHATHU))
+print("DEBUG >>> env file path:", BASE_DIR / '.env')
+print("DEBUG >>> MONGO_URI_Chathu:", repr(os.getenv("MONGO_URI_Chathu")))
