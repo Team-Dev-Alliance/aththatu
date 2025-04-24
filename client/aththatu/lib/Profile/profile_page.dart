@@ -43,6 +43,12 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             _currentNavIndex = index;
             if (index == 0) {
               Navigator.pushReplacementNamed(context, '/home');
+            }else if (index == 1) {
+              Navigator.pushReplacementNamed(context, '/categories');
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, '/cart');
+            } else if (index == 3) {
+              // Already on Profile page, do nothing
             }
             // Handle other navigation logic
           });

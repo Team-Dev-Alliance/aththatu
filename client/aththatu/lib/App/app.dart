@@ -7,6 +7,7 @@ import '../Authentication/login.dart';
 import '../Authentication/signup.dart';
 import '../Analytics/analytics_page.dart';
 import '../Orders/add_product_page.dart';
+import '../Category/category.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/seller_orders': (context) => const SellerOrdersPage(),
         '/analytics': (context) => const AnalyticsPage(),
         '/add_product': (context) => const AddProductPage(),
+        '/categories': (context) => const CategoryScreen(),
       },
     );
   }
