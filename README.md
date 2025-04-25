@@ -34,8 +34,29 @@ A versatile mobile application that offers various features for users and seller
 - **Example**:
   ```bash
   curl -X POST http://localhost:8000/users/createprofile/ \
-     -H "Content-Type: application/json" \
-     -d '{"username":"gunathilaka", "email":"test@gmail.com", "passwordhash":"123"}'
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "john_doe",
+    "email": "john.doe@example.com",
+    "phonenumbers": [
+      "+15551234567",
+      "+15559876543"
+    ],
+    "profileimagelink": "https://example.com/profiles/johndoe.jpg",
+    "passwordhash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+    "address": {
+      "district": "Colombo",
+      "town": "Dehiwala",
+      "extraDetails": "No. 45, Galle Road, Near Railway Station",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+            79.865,
+            6.8562
+          ]
+        }
+      }
+    }'
   ```
 
 ### 3. Get the Closest Seller to a Given Location
