@@ -37,6 +37,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
             _currentNavIndex = index;
             if (index == 3) {
               Navigator.pushReplacementNamed(context, '/seller_profile');
+            } else if (index == 2) {
+              Navigator.pushReplacementNamed(context, '/seller_orders');
             }
             // Handle other navigation logic
           });
@@ -217,7 +219,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                         children: [
                           Icon(Icons.analytics),
                           SizedBox(width: 8),
-                          Text('View business analytics'),
+                          Text('Business Analytics'),
                         ],
                       ),
                     ),

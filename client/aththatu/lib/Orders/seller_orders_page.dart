@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 // import '../components/title_bar.dart';
+import '../components/seller_navigation_bar.dart' as nav;
 
-class SellerOrdersPage extends StatelessWidget {
+class SellerOrdersPage extends StatefulWidget {
   const SellerOrdersPage({super.key});
+
+  @override
+  State<SellerOrdersPage> createState() => _SellerOrdersPageState();
+}
+
+class _SellerOrdersPageState extends State<SellerOrdersPage> {
+  int _currentNavIndex = 2; // Home tab selected
 
   @override
   Widget build(BuildContext context) {
@@ -10,11 +18,28 @@ class SellerOrdersPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+          onPressed:
+              () => Navigator.pushReplacementNamed(context, '/seller_home'),
         ),
         title: const Text('My Orders'),
         backgroundColor: Colors.white,
         elevation: 0,
+      ),
+      bottomNavigationBar: nav.NavigationBar(
+        currentIndex: _currentNavIndex,
+        onTap: (index) {
+          setState(() {
+            _currentNavIndex = index;
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, '/seller_home');
+            } else if (index == 1) {
+              Navigator.pushReplacementNamed(context, '/seller_products');
+            } else if (index == 3) {
+              Navigator.pushReplacementNamed(context, '/seller_profile');
+            }
+            // Handle other navigation logic
+          });
+        },
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -117,8 +142,17 @@ class SellerOrdersPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Order: $orderId', style: const TextStyle(fontWeight: FontWeight.bold)),
-                  Text(product, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text(
+                    'Order: $orderId',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    product,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Text('Quantity: $quantity'),
                   Text('Order by: $orderedBy'),
                   Text('Phone No: $phone'),
