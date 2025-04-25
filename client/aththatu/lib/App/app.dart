@@ -7,7 +7,7 @@ import '../Authentication/login.dart';
 import '../Authentication/signup.dart';
 import '../Analytics/analytics_page.dart';
 import '../Orders/add_product_page.dart';
-import '../Category/category.dart';
+import '../category/category.dart';
 import '../Cart/cart_page.dart';
 
 void main() {
