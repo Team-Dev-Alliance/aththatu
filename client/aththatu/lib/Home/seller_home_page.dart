@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../components/title_bar.dart';
 import '../components/seller_navigation_bar.dart' as nav;
 import '../Orders/seller_orders_page.dart';
 import '../Analytics/analytics_page.dart';
 import '../Orders/add_product_page.dart';
+import '../Authentication/auth_service.dart';
 
 class SellerHomePage extends StatefulWidget {
   const SellerHomePage({super.key});
@@ -25,20 +25,35 @@ class _SellerHomePageState extends State<SellerHomePage> {
     'assets/order2.jpg',
     'assets/order3.jpg',
   ];
+  final AuthService _authService = AuthService();
+
+  Future<void> _handleSignOut() async {
+    await _authService.signOut();
+    Navigator.pushReplacementNamed(context, '/login');
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TitleBar(),
+      appBar: AppBar(
+        title: const Text('Seller Home'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: _handleSignOut,
+          ),
+        ],
+      ),
       bottomNavigationBar: nav.NavigationBar(
         currentIndex: _currentNavIndex,
         onTap: (index) {
           setState(() {
             _currentNavIndex = index;
             if (index == 3) {
-              Navigator.pushReplacementNamed(context, '/seller_profile');
+              Navigator.pushReplacementNamed(context, '/profile');
             }
-            // Handle other navigation logic
           });
         },
       ),
@@ -46,7 +61,6 @@ class _SellerHomePageState extends State<SellerHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Banner
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16.0),
@@ -56,7 +70,6 @@ class _SellerHomePageState extends State<SellerHomePage> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
-            // My Products
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -99,7 +112,6 @@ class _SellerHomePageState extends State<SellerHomePage> {
                 ],
               ),
             ),
-            // My Orders
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -110,18 +122,13 @@ class _SellerHomePageState extends State<SellerHomePage> {
                     children: [
                       const Text(
                         'My Orders',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const SellerOrdersPage(),
-                            ),
+                            MaterialPageRoute(builder: (context) => const SellerOrdersPage()),
                           );
                         },
                         child: const Icon(Icons.arrow_forward_ios, size: 16),
@@ -161,12 +168,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
                 ],
               ),
             ),
-            // Buttons
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Row(
                 children: [
                   Expanded(
@@ -174,9 +177,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const AddProductPage(),
-                          ),
+                          MaterialPageRoute(builder: (context) => const AddProductPage()),
                         );
                       },
                       style: OutlinedButton.styleFrom(
@@ -201,9 +202,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const AnalyticsPage(),
-                          ),
+                          MaterialPageRoute(builder: (context) => const AnalyticsPage()),
                         );
                       },
                       style: OutlinedButton.styleFrom(

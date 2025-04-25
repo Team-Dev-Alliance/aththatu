@@ -1,0 +1,26 @@
+PS D:\Flutter_Projects\DevAlliance\aththatu\client\aththatu\android> keytool -list -v -keystore C:\Users\sansi\.android\debug.keystore -alias androiddebugkey -storepass android -keypass android
+Alias name: androiddebugkey
+Creation date: Jun 1, 2024
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: C=US, O=Android, CN=Android Debug
+Issuer: C=US, O=Android, CN=Android Debug
+Serial number: 1
+Valid from: Sat Jun 01 21:36:42 IST 2024 until: Mon May 25 21:36:42 IST 2054
+Certificate fingerprints:
+         SHA1: 61:52:2D:99:86:EF:32:CE:16:8F:53:AD:A4:8C:92:01:3A:AD:95:9E
+         SHA256: B7:5D:FE:99:8C:FD:27:62:A3:7A:B8:DA:B5:B5:A0:5B:43:6E:AB:B4:3D:BB:D8:D0:04:8A:2E:1B:F5:D0:43:47
+Signature algorithm name: SHA1withRSA (weak)
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 1
+
+Warning:
+The certificate uses the SHA1withRSA signature algorithm which is considered a security risk.
+
+Firebase configuration file lib\firebase_options.dart generated successfully with the following Firebase apps:
+
+Platform  Firebase App Id
+web       1:362639636055:web:25246dffadd54a38085512
+android   1:362639636055:android:2178a8bbfe72cc87085512
+ios       1:362639636055:ios:256cea31554cea3b085512
