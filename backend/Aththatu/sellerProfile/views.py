@@ -1,3 +1,4 @@
+import logging
 from django.http import JsonResponse
 from utils import get_db_handle
 
@@ -10,4 +11,5 @@ def get_all_sellers(request):
         return JsonResponse({"sellers": sellers}, status=200)
 
     except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
+        logging.error("An error occurred: %s", str(e))
+        return JsonResponse({"error": "An internal error occurred."}, status=500)
