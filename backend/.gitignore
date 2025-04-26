@@ -1,6 +1,6 @@
 # Below is my(Himala) environment. If needed change the way you need it
 venv/
-.env/
+.env
 
 *.pyc
 __pycache__/
