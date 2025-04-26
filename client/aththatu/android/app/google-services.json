@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "362639636055",
+    "project_id": "aththatu001",
+    "storage_bucket": "aththatu001.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362639636055:android:2178a8bbfe72cc87085512",
+        "android_client_info": {
+          "package_name": "com.dev_alliance.aththatu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362639636055-7sf2dea9nanmrk71hg09c06vln0n6g4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXaFOkXUNxkMYPDAbIrGsmIiluv0U9hHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362639636055-7sf2dea9nanmrk71hg09c06vln0n6g4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
