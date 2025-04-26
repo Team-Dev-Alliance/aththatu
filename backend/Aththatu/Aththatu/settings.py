@@ -141,10 +141,7 @@ MONGO_DATABASES = {
 }
 
 MONGO_URI = os.getenv("MONGO_URI")
-MONGO_URI_RAVI = os.getenv("RAVI_URL")
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:52606",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 
