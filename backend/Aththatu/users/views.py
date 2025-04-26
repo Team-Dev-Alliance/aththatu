@@ -5,7 +5,7 @@ from django.conf import settings
 import json
 
 def get_profile_by_username(request, username):
-    db_handle, _ = get_db_handle(settings.MONGO_DATABASES['user'])
+    db_handle, _ = get_db_handle("user")
     profile_collection = db_handle['profile']
     profile = profile_collection.find_one({"username": username})
 
@@ -26,7 +26,7 @@ def create_user(request):
             email = data.get('email')
             passwordhash = data.get('passwordhash')
 
-            db_handle, _ = get_db_handle(settings.MONGO_DATABASES['user'])
+            db_handle, _ = get_db_handle('user')
             profile_collection = db_handle['profile']
 
             result = profile_collection.insert_one({

@@ -22,7 +22,7 @@ def get_closet_seller_address(request):
             limit = int(body.get("limit", 5))  # Default to 5 closest addresses
 
             # Connect to MongoDB
-            db_handle, _ = get_db_handle(settings.MONGO_DATABASES['seller'])
+            db_handle, _ = get_db_handle('seller')
             seller_address = db_handle['address']
 
             # Geospatial query using $near

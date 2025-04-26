@@ -128,12 +128,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# The test_databse I (himala) added for testing. Will make a seperate user database.
-# If multiple database needed add in this dictionary and correctly get them using dictionary indexing.
-MONGO_DATABASES = {
-    "test_database": os.getenv("MONGO_TEST_DATABASE"),
-    "user": os.getenv("MONGO_USER_DATABASE"),
-    "seller": os.getenv("MONGO_SELLER_DATABASE")
-}
-
 MONGO_URI = os.getenv("MONGO_URI")
