@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../components/title_bar.dart';
 import '../components/navigation_bar.dart' as nav;
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,20 +11,40 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int _currentNavIndex = 0;
+  List<dynamic> _vendors = [];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
+    _fetchVendors();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  Future<void> _fetchVendors() async {
+    try {
+      final response = await http.get(
+        Uri.parse('http://127.0.0.1:8000/sellerProfile/sellerDetails/'),
+      );
+      if (response.statusCode == 200) {
+        setState(() {
+          _vendors = json.decode(response.body)['sellers'];
+        });
+      } else {
+        print('Failed to load vendors');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   @override
@@ -77,7 +99,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ),
           // Filter Buttons
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -115,10 +140,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             child: TabBarView(
               controller: _tabController,
               children: [
-                _buildVendorList(),
-                _buildVendorList(), // Placeholder for other tabs
-                _buildVendorList(),
-                _buildVendorList(),
+                _buildVendorList('Bakes'),
+                _buildVendorList('Clothes'),
+                _buildVendorList('Handcrafts'),
+                _buildVendorList('Misceleaneous'),
               ],
             ),
           ),
@@ -127,11 +152,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     );
   }
 
-  Widget _buildVendorList() {
+  Widget _buildVendorList(String category) {
+    final filteredVendors =
+        _vendors.where((vendor) {
+          return vendor['category']?.toLowerCase() == category.toLowerCase();
+        }).toList();
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: 3, // Example: 3 vendor cards
+      itemCount:filteredVendors.length, // Example: 3 vendor cards
       itemBuilder: (context, index) {
+        final vendor = filteredVendors[index];
+        final tags = vendor['tags'] as List<dynamic>? ?? [];
         return Card(
           color: Colors.green[50],
           shape: RoundedRectangleBorder(
@@ -146,42 +177,31 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Ayana Home Bakes',
+                      Text(
+                        vendor['name'] ?? 'Unknown Vendor',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.green[100],
-                              side: BorderSide.none,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                       Wrap(
+                      spacing: 8,
+                      children: tags.map<Widget>((tag) {
+                        return OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.green[100],
+                            side: BorderSide.none,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Text('Cakes'),
                           ),
-                          const SizedBox(width: 8),
-                          OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.green[100],
-                              side: BorderSide.none,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            child: const Text('Confectionaries'),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
+                          child: Text(tag),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 8),
                       const Row(
                         children: [
                           Icon(Icons.star, color: Colors.yellow, size: 20),
