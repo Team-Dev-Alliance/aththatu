@@ -44,20 +44,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => CartProvider()),
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => CartProvider())],
       child: MaterialApp(
         title: 'Aththatu E-Commerce',
         theme: ThemeData(
           primarySwatch: Colors.green,
           scaffoldBackgroundColor: Colors.yellow[50],
-          textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(color: Colors.black),
+          ),
         ),
+
+        home: AuthWrapper(),
         initialRoute: '/login',
         routes: {
           '/login': (context) => const LoginPage(),
           '/signup': (context) => const SignupPage(),
+          '/signup_details':
+              (context) => const SignupDetailsPage(
+                fullName: '',
+                email: '',
+                userType: '',
+              ),
           '/home': (context) => const HomePage(),
           '/profile': (context) => const ProfilePage(),
           '/seller_home': (context) => const SellerHomePage(),
@@ -66,45 +74,26 @@ class MyApp extends StatelessWidget {
           '/add_product': (context) => const AddProductPage(),
           '/categories': (context) => const CategoryScreen(),
           '/cart': (context) => const CartPage(),
-        },
-      ),
-      
-      home: AuthWrapper(),
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => const LoginPage(),
-        '/signup': (context) => const SignupPage(),
-        '/signup_details':
-            (context) =>
-                const SignupDetailsPage(fullName: '', email: '', userType: ''),
-        '/home': (context) => const HomePage(),
-        '/profile': (context) => const ProfilePage(),
-        '/seller_home': (context) => const SellerHomePage(),
-        '/seller_orders': (context) => const SellerOrdersPage(),
-        '/analytics': (context) => const AnalyticsPage(),
-        '/add_product': (context) => const AddProductPage(),
-        '/categories': (context) => const CategoryScreen(),
-        '/cart': (context) => const CartPage(),
-        '/order_history': (context) => const OrderHistoryPage(),
-        '/order_details':
-            (context) => OrderDetailsPage(
-              order: order_model.Order(
-                orderId: '',
-                price: 0.0,
-                timestamp: DateTime.now(),
-                products: [],
-                customer: order_model.Customer(
-                  name: '',
-                  address: '',
-                  phone: '',
-                  email: '',
-                  avatarUrl: '',
-                  memberSince: '',
+          '/order_history': (context) => const OrderHistoryPage(),
+          '/order_details':
+              (context) => OrderDetailsPage(
+                order: order_model.Order(
+                  orderId: '',
+                  price: 0.0,
+                  timestamp: DateTime.now(),
+                  products: [],
+                  customer: order_model.Customer(
+                    name: '',
+                    address: '',
+                    phone: '',
+                    email: '',
+                    avatarUrl: '',
+                    memberSince: '',
+                  ),
                 ),
               ),
-            ),
-      },
-
+        },
+      ),
     );
   }
 }
