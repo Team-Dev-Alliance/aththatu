@@ -26,8 +26,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
     Icons.category_outlined,
   ];
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -28,6 +28,17 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // Get arguments to check if we need to open a specific tab
+    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    if (arguments != null && arguments.containsKey('initialTab')) {
+      _tabController.animateTo(arguments['initialTab']);
+    }
+  }
+
+  @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
@@ -67,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage>
                 NotificationsTab(),
                 WishlistTab(),
                 OrdersTab(),
-                WalletTab(),
+                // WalletTab(),
               ],
             ),
           ),
