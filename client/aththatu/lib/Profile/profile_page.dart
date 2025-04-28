@@ -66,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
                 NotificationsTab(),
                 WishlistTab(),
                 OrdersTab(),
-                WalletTab(),
+                // WalletTab(),
               ],
             ),
           ),
