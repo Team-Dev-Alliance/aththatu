@@ -62,7 +62,9 @@ class _CartPageState extends State<CartPage> {
         onTap: (index) {
           setState(() {
             _currentNavIndex = index;
-            if (index == 1) {
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, '/home');
+            } else if (index == 1) {
               Navigator.pushReplacementNamed(context, '/categories');
             } else if (index == 2) {
               Navigator.pushReplacementNamed(context, '/cart');
