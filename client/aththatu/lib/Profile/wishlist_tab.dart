@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../Cart/cart_provider.dart';
 
 class WishlistTab extends StatelessWidget {
   const WishlistTab({super.key});
 
-  Widget _buildWishlistCard() {
+  Widget _buildWishlistCard(BuildContext context) {
+    // Access the CartProvider to add items to cart
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    
     return Card(
       color: Colors.yellow[100],
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -61,7 +66,28 @@ class WishlistTab extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: ElevatedButton.icon(
                 onPressed: () {
-                  // TODO: Implement add to cart logic
+                  // Add to cart logic
+                  cartProvider.addItem({
+                    'shopName': 'Chathu Clay Pots',
+                    'productName': 'Cacti Pot, Medium size',
+                    'unitPrice': 6969.0,
+                    'imageUrl': 'https://via.placeholder.com/150',
+                    'quantity': 1,
+                  });
+                  
+                  // Show confirmation snackbar
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('Item added to cart'),
+                      duration: const Duration(seconds: 2),
+                      action: SnackBarAction(
+                        label: 'View Cart',
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/cart');
+                        },
+                      ),
+                    ),
+                  );
                 },
                 icon: const Icon(
                   Icons.shopping_cart,
@@ -85,8 +111,8 @@ class WishlistTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        _buildWishlistCard(),
-        _buildWishlistCard(), // Add more cards as needed
+        _buildWishlistCard(context),
+        _buildWishlistCard(context), // Add more cards as needed
       ],
     );
   }

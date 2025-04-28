@@ -23,7 +23,13 @@ class CartItemTile extends StatefulWidget {
 }
 
 class _CartItemTileState extends State<CartItemTile> {
-  int quantity = 1;
+  late int quantity;
+  
+  @override
+  void initState() {
+    super.initState();
+    quantity = widget.initialQuantity;
+  }
 
   void _incrementQuantity() {
     setState(() {
@@ -38,15 +44,12 @@ class _CartItemTileState extends State<CartItemTile> {
         quantity--;
         widget.onQuantityChanged(quantity);
       } else {
-        // Optionally you can also notify parent to remove the widget
-        // For now just showing a snackbar
+        // Removing item from cart
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Item removed from cart")),
         );
-        setState(() {
-          quantity = 0;
-          widget.onQuantityChanged(quantity);
-        });
+        quantity = 0;
+        widget.onQuantityChanged(quantity);
       }
     });
   }
@@ -94,7 +97,7 @@ class _CartItemTileState extends State<CartItemTile> {
                     children: [
                       Text(widget.productName,
                           style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text('Rs. ${widget.unitPrice * quantity}',
+                      Text('Rs. ${widget.unitPrice}',
                           style: TextStyle(color: Colors.grey[700])),
                     ],
                   ),

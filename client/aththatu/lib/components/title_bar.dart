@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../Cart/cart_provider.dart';
 
 class TitleBar extends StatelessWidget implements PreferredSizeWidget {
   const TitleBar({super.key});
@@ -10,19 +12,297 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       actions: [
         NotificationBell(),
-        IconButton(
-          icon: const Icon(Icons.shopping_cart_outlined, color: Colors.black),
-          onPressed: () {
-            // Navigate to cart
-            Navigator.pushReplacementNamed(context, '/cart');
-          },
-        ),
+        CartIcon(),
       ],
     );
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class CartIcon extends StatefulWidget {
+  const CartIcon({super.key});
+
+  @override
+  _CartIconState createState() => _CartIconState();
+}
+
+class _CartIconState extends State<CartIcon> {
+  final GlobalKey _cartKey = GlobalKey();
+  bool _showCartMenu = false;
+
+  void _toggleCartMenu() {
+    setState(() {
+      _showCartMenu = !_showCartMenu;
+    });
+    
+    if (_showCartMenu) {
+      final cartProvider = Provider.of<CartProvider>(context, listen: false);
+      final cartItems = cartProvider.cartItems;
+      
+      // Show the popup
+      final RenderBox renderBox = _cartKey.currentContext!.findRenderObject() as RenderBox;
+      final position = renderBox.localToGlobal(Offset.zero);
+      
+      showMenu(
+        context: context,
+        color: Colors.white,
+        position: RelativeRect.fromLTRB(
+          position.dx,
+          position.dy + renderBox.size.height,
+          position.dx + renderBox.size.width,
+          position.dy + renderBox.size.height,
+        ),
+        items: [
+          PopupMenuItem(
+            enabled: false,
+            padding: EdgeInsets.zero,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.75,
+              constraints: BoxConstraints(
+                minWidth: 300,
+                maxWidth: 400,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Your Cart',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pushReplacementNamed(context, '/cart');
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.green,
+                          ),
+                          child: const Text(
+                            'View Cart',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Container(
+                    color: Colors.white,
+                    constraints: BoxConstraints(
+                      maxHeight: 300,
+                    ),
+                    child: cartItems.isEmpty
+                        ? const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Center(
+                              child: Text(
+                                'Your cart is empty',
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          )
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: cartItems.length > 3 ? 3 : cartItems.length,
+                            itemBuilder: (context, index) {
+                              final item = cartItems[index];
+                              return _buildCartItem(item);
+                            },
+                          ),
+                  ),
+                  const Divider(height: 1, thickness: 1),
+                  Container(
+                    color: Colors.white,
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        if (cartItems.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Subtotal:'),
+                                Text(
+                                  'Rs. ${cartProvider.calculateSubtotal().toStringAsFixed(2)}',
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ElevatedButton(
+                          onPressed: cartItems.isEmpty
+                              ? null
+                              : () {
+                                  Navigator.pop(context);
+                                  Navigator.pushReplacementNamed(context, '/cart');
+                                },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange,
+                            minimumSize: const Size.fromHeight(40),
+                          ),
+                          child: const Text('Checkout'),
+                        ),
+                        if (cartItems.length > 3)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.pushReplacementNamed(context, '/cart');
+                              },
+                              child: Text(
+                                'See all ${cartItems.length} items',
+                                style: const TextStyle(color: Colors.blue),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+        elevation: 8.0,
+      ).then((value) {
+        setState(() {
+          _showCartMenu = false;
+        });
+      });
+    }
+  }
+
+  Widget _buildCartItem(Map<String, dynamic> item) {
+    return Material(
+      color: Colors.white,
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, '/cart');
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Icon(Icons.image, color: Colors.grey),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['productName'],
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      item['shopName'],
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Rs. ${item['unitPrice']}',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Qty: ${item['quantity']}',
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Get the cart item count from CartProvider
+    final cartProvider = context.watch<CartProvider>();
+    final cartItemCount = cartProvider.cartItems.length;
+    
+    return IconButton(
+      key: _cartKey,
+      icon: Stack(
+        children: [
+          const Icon(Icons.shopping_cart_outlined, color: Colors.black),
+          if (cartItemCount > 0)
+            Positioned(
+              right: 0,
+              top: 0,
+              child: Container(
+                padding: const EdgeInsets.all(1),
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                constraints: const BoxConstraints(
+                  minWidth: 12,
+                  minHeight: 12,
+                ),
+                child: Text(
+                  cartItemCount > 9 ? '9+' : '$cartItemCount',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 8,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+        ],
+      ),
+      onPressed: _toggleCartMenu,
+    );
+  }
 }
 
 class NotificationBell extends StatefulWidget {
