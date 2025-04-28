@@ -26,13 +26,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
     Icons.category_outlined,
   ];
 
-  void _onNavTapped(int index) {
-    setState(() {
-      _currentNavIndex = index;
-      // Add routing here if needed
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

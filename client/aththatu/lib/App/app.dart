@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+
 import '../Home/home_page.dart';
 import '../Profile/profile_page.dart';
 import '../Home/seller_home_page.dart';
@@ -13,10 +15,12 @@ import '../Orders/add_product_page.dart';
 import '../category/category.dart';
 import '../Cart/cart_page.dart';
 import '../Authentication/auth_service.dart';
+
 import '../Orders/order_history_page.dart';
 import '../Orders/order_details_page.dart';
 import '../Orders/order_model.dart' as order_model;
 import '../Authentication/signup_details_page.dart';
+import '../Cart/cart_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -39,13 +43,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Aththatu E-Commerce',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        scaffoldBackgroundColor: Colors.yellow[50],
-        textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => CartProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Aththatu E-Commerce',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+          scaffoldBackgroundColor: Colors.yellow[50],
+          textTheme: const TextTheme(bodyMedium: TextStyle(color: Colors.black)),
+        ),
+        initialRoute: '/login',
+        routes: {
+          '/login': (context) => const LoginPage(),
+          '/signup': (context) => const SignupPage(),
+          '/home': (context) => const HomePage(),
+          '/profile': (context) => const ProfilePage(),
+          '/seller_home': (context) => const SellerHomePage(),
+          '/seller_orders': (context) => const SellerOrdersPage(),
+          '/analytics': (context) => const AnalyticsPage(),
+          '/add_product': (context) => const AddProductPage(),
+          '/categories': (context) => const CategoryScreen(),
+          '/cart': (context) => const CartPage(),
+        },
       ),
+      
       home: AuthWrapper(),
       initialRoute: '/login',
       routes: {
@@ -81,6 +104,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
       },
+
     );
   }
 }

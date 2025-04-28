@@ -18,7 +18,7 @@ class ProfileTabBar extends StatelessWidget {
         _buildTab('Notifications', Icons.notifications),
         _buildTab('My Wishlist', Icons.favorite_border),
         _buildTab('My Orders', Icons.receipt),
-        _buildTab('Wallet', Icons.account_balance_wallet),
+        // _buildTab('Wallet', Icons.account_balance_wallet),
       ],
     );
   }
