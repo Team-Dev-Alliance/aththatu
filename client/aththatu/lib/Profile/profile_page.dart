@@ -16,7 +16,8 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int _currentNavIndex = 3; // Profile tab selected
 
@@ -43,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             _currentNavIndex = index;
             if (index == 0) {
               Navigator.pushReplacementNamed(context, '/home');
-            }else if (index == 1) {
+            } else if (index == 1) {
               Navigator.pushReplacementNamed(context, '/categories');
             } else if (index == 2) {
               Navigator.pushReplacementNamed(context, '/cart');
@@ -61,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children:  [
+              children: [
                 UserSettingsTab(),
                 NotificationsTab(),
                 WishlistTab(),

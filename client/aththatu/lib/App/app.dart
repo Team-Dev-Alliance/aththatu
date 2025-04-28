@@ -9,6 +9,7 @@ import '../Analytics/analytics_page.dart';
 import '../Orders/add_product_page.dart';
 import '../Category/category.dart';
 import '../Cart/cart_page.dart';
+import '../SellerProfile/seller_profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignupPage(),
         '/home': (context) => const HomePage(),
         '/profile': (context) => const ProfilePage(),
+        '/seller_profile': (context) => const SellerProfile(),
         '/seller_home': (context) => const SellerHomePage(),
         '/seller_orders': (context) => const SellerOrdersPage(),
         '/analytics': (context) => const AnalyticsPage(),
