@@ -5,7 +5,6 @@ import 'user_settings_tab.dart';
 import 'notifications_tab.dart';
 import 'wishlist_tab.dart';
 import 'orders_tab.dart';
-import 'wallet_tab.dart';
 import '../components/title_bar.dart';
 import '../components/navigation_bar.dart' as nav;
 

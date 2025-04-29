@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/title_bar.dart';
 import '../components/navigation_bar.dart' as nav;
+import '../ShopPage/shop_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,7 +10,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   int _currentNavIndex = 0;
 
@@ -72,43 +74,46 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               Tab(text: 'Bakes'),
               Tab(text: 'Clothes'),
               Tab(text: 'Handcrafts'),
-              Tab(text: 'Misceleaneous'),
+              Tab(text: 'Misc.'),
             ],
           ),
           // Filter Buttons
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.green[100],
-                      side: BorderSide.none,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    child: const Text('Delivery Time'),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.green[50],
-                      side: BorderSide.none,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    child: const Text('Filters'),
-                  ),
-                ),
-              ],
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
             ),
+            // child: Row(
+            //   children: [
+            //     Expanded(
+            //       child: OutlinedButton(
+            //         onPressed: () {},
+            //         style: OutlinedButton.styleFrom(
+            //           backgroundColor: Colors.green[100],
+            //           side: BorderSide.none,
+            //           shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(20),
+            //           ),
+            //         ),
+            //         child: const Text('Delivery Time'),
+            //       ),
+            //     ),
+            //     const SizedBox(width: 8),
+            //     Expanded(
+            //       child: OutlinedButton(
+            //         onPressed: () {},
+            //         style: OutlinedButton.styleFrom(
+            //           backgroundColor: Colors.green[50],
+            //           side: BorderSide.none,
+            //           shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(20),
+            //           ),
+            //         ),
+            //         child: const Text('Filters'),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
           // Vendor List
           Expanded(
@@ -138,21 +143,24 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             'name': 'Ayana Home Bakes',
             'categories': ['Cakes', 'Confectionaries'],
             'rating': 5,
+            'image': 'assets/ayana.png',
           },
           {
             'name': 'Dulce Sweet Treats',
             'categories': ['Cupcakes', 'Pastries'],
             'rating': 4,
+            'image': 'assets/dulce.png',
           },
           {
             'name': 'Flour Power Bakery',
             'categories': ['Bread', 'Cookies'],
             'rating': 5,
+            'image': 'assets/flour.png',
           },
         ];
-        
+
         final vendor = bakesVendors[index];
-        
+
         return Card(
           color: Colors.green[50],
           shape: RoundedRectangleBorder(
@@ -198,14 +206,29 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       Row(
                         children: [
                           for (var i = 0; i < vendor['rating']; i++)
-                            const Icon(Icons.star, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                           for (var i = vendor['rating']; i < 5; i++)
-                            const Icon(Icons.star_border, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star_border,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                         ],
                       ),
                       const SizedBox(height: 8),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ShopPage(),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow[600],
                           shape: RoundedRectangleBorder(
@@ -218,12 +241,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   ),
                 ),
                 CircleAvatar(
-                  radius: 40,
+                  radius: 45,
                   backgroundColor: Colors.green[200],
-                  child: Text(
-                    vendor['name'].substring(0, 1),
-                    style: const TextStyle(fontSize: 24, color: Colors.white),
-                  ),
+                  backgroundImage: AssetImage(vendor['image']),
+                  // child: Text(
+                  //   vendor['name'].substring(0, 1),
+                  //   style: const TextStyle(fontSize: 24, color: Colors.white),
+                  // ),
                 ),
               ],
             ),
@@ -244,21 +268,24 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             'name': 'Trendy Threads',
             'categories': ['Shirts', 'Dresses'],
             'rating': 5,
+            'image': 'assets/trendy.png',
           },
           {
             'name': 'Island Style Boutique',
             'categories': ['Traditional', 'Casual'],
             'rating': 4,
+            'image': 'assets/island.png',
           },
           {
             'name': 'Fashion Forward',
             'categories': ['Accessories', 'Footwear'],
             'rating': 4,
+            'image': 'assets/fashion.png',
           },
         ];
-        
+
         final vendor = clothesVendors[index];
-        
+
         return Card(
           color: Colors.blue[50],
           shape: RoundedRectangleBorder(
@@ -304,9 +331,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       Row(
                         children: [
                           for (var i = 0; i < vendor['rating']; i++)
-                            const Icon(Icons.star, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                           for (var i = vendor['rating']; i < 5; i++)
-                            const Icon(Icons.star_border, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star_border,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -318,18 +353,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: const Text('Visit Page'),
+                        child: const Text(
+                          'Visit Page',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
                 ),
                 CircleAvatar(
-                  radius: 40,
+                  radius: 45,
                   backgroundColor: Colors.blue[200],
-                  child: Text(
-                    vendor['name'].substring(0, 1),
-                    style: const TextStyle(fontSize: 24, color: Colors.white),
-                  ),
+                  backgroundImage: AssetImage(vendor['image']),
+                  // child: Text(
+                  //   vendor['name'].substring(0, 1),
+                  //   style: const TextStyle(fontSize: 24, color: Colors.white),
+                  // ),
                 ),
               ],
             ),
@@ -350,21 +389,24 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             'name': 'Creative Crafts',
             'categories': ['Pottery', 'Sculptures'],
             'rating': 5,
+            'image': 'assets/creative.png',
           },
           {
             'name': 'Handmade Haven',
             'categories': ['Jewelry', 'Accessories'],
             'rating': 4,
+            'image': 'assets/handmade.png',
           },
           {
             'name': 'Artisanal Treasures',
             'categories': ['Home Decor', 'Wall Art'],
             'rating': 5,
+            'image': 'assets/artisanal.png',
           },
         ];
-        
+
         final vendor = handcraftsVendors[index];
-        
+
         return Card(
           color: Colors.orange[50],
           shape: RoundedRectangleBorder(
@@ -410,32 +452,44 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       Row(
                         children: [
                           for (var i = 0; i < vendor['rating']; i++)
-                            const Icon(Icons.star, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                           for (var i = vendor['rating']; i < 5; i++)
-                            const Icon(Icons.star_border, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star_border,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                         ],
                       ),
                       const SizedBox(height: 8),
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.orange[600],
+                          backgroundColor: Colors.orange[700],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: const Text('Visit Page'),
+                        child: const Text(
+                          'Visit Page',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
                 ),
                 CircleAvatar(
-                  radius: 40,
+                  radius: 45,
                   backgroundColor: Colors.orange[200],
-                  child: Text(
-                    vendor['name'].substring(0, 1),
-                    style: const TextStyle(fontSize: 24, color: Colors.white),
-                  ),
+                  backgroundImage: AssetImage(vendor['image']),
+                  // child: Text(
+                  //   vendor['name'].substring(0, 1),
+                  //   style: const TextStyle(fontSize: 24, color: Colors.white),
+                  // ),
                 ),
               ],
             ),
@@ -454,23 +508,26 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         final List<Map<String, dynamic>> miscVendors = [
           {
             'name': 'Gadget Galaxy',
-            'categories': ['Electronics', 'Accessories'],
+            'categories': ['Electronics', 'Repairs'],
             'rating': 4,
+            'image': 'assets/gadget.png',
           },
           {
             'name': 'Green Thumb Gardens',
             'categories': ['Plants', 'Garden Tools'],
             'rating': 5,
+            'image': 'assets/green.png',
           },
           {
             'name': 'Wellness World',
             'categories': ['Beauty', 'Health'],
             'rating': 4,
+            'image': 'assets/wellness.png',
           },
         ];
-        
+
         final vendor = miscVendors[index];
-        
+
         return Card(
           color: Colors.purple[50],
           shape: RoundedRectangleBorder(
@@ -516,9 +573,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       Row(
                         children: [
                           for (var i = 0; i < vendor['rating']; i++)
-                            const Icon(Icons.star, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                           for (var i = vendor['rating']; i < 5; i++)
-                            const Icon(Icons.star_border, color: Colors.yellow, size: 20),
+                            const Icon(
+                              Icons.star_border,
+                              color: Colors.yellow,
+                              size: 20,
+                            ),
                         ],
                       ),
                       const SizedBox(height: 8),
@@ -530,18 +595,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
-                        child: const Text('Visit Page'),
+                        child: const Text(
+                          'Visit Page',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
                 ),
                 CircleAvatar(
-                  radius: 40,
+                  radius: 45,
                   backgroundColor: Colors.purple[200],
-                  child: Text(
-                    vendor['name'].substring(0, 1),
-                    style: const TextStyle(fontSize: 24, color: Colors.white),
-                  ),
+                  backgroundImage: AssetImage(vendor['image']),
+                  // child: Text(
+                  //   vendor['name'].substring(0, 1),
+                  //   style: const TextStyle(fontSize: 24, color: Colors.white),
+                  // ),
                 ),
               ],
             ),
