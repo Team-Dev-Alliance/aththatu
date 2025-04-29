@@ -6,15 +6,15 @@ class CartProvider extends ChangeNotifier {
     {
       'shopName': 'Chathu Clay Pots',
       'productName': 'Cacti Pot, Medium size',
-      'unitPrice': 6969.0,
-      'imageUrl': 'https://via.placeholder.com/150',
+      'unitPrice': 400.0,
+      'imageUrl': 'assets/cart_clay_pot.png',
       'quantity': 1,
     },
     {
       'shopName': 'Lanka Garden Supplies',
       'productName': 'Soil Bag - 5kg',
-      'unitPrice': 1499.0,
-      'imageUrl': 'https://via.placeholder.com/150',
+      'unitPrice': 200.0,
+      'imageUrl': 'assets/soil_bag.png',
       'quantity': 2,
     },
   ];

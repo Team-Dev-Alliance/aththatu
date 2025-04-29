@@ -4,7 +4,7 @@ class CartItemTile extends StatefulWidget {
   final String shopName;
   final String productName;
   final double unitPrice;
-  // final String imageUrl;
+  final String imageUrl;
   final int initialQuantity;
   final ValueChanged<int> onQuantityChanged;
 
@@ -13,7 +13,7 @@ class CartItemTile extends StatefulWidget {
     required this.shopName,
     required this.productName,
     required this.unitPrice,
-    // required this.imageUrl,
+    required this.imageUrl,
     required this.initialQuantity,
     required this.onQuantityChanged,
   });
@@ -24,7 +24,7 @@ class CartItemTile extends StatefulWidget {
 
 class _CartItemTileState extends State<CartItemTile> {
   late int quantity;
-  
+
   @override
   void initState() {
     super.initState();
@@ -45,9 +45,9 @@ class _CartItemTileState extends State<CartItemTile> {
         widget.onQuantityChanged(quantity);
       } else {
         // Removing item from cart
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Item removed from cart")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Item removed from cart")));
         quantity = 0;
         widget.onQuantityChanged(quantity);
       }
@@ -76,7 +76,9 @@ class _CartItemTileState extends State<CartItemTile> {
                   child: Text(
                     widget.shopName,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const Icon(Icons.arrow_forward_ios, size: 16),
@@ -87,18 +89,26 @@ class _CartItemTileState extends State<CartItemTile> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Image
-                const Icon(Icons.image, size: 60, color: Colors.grey),
+                Image(
+                  image: AssetImage(widget.imageUrl),
+                  width: 80,
+                  height: 80,
+                ),
+                // const Icon(Icons.image, size: 60, color: Colors.grey),
                 const SizedBox(width: 10),
                 // Text + price
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.productName,
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text('Rs. ${widget.unitPrice}',
-                          style: TextStyle(color: Colors.grey[700])),
+                      Text(
+                        widget.productName,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Rs. ${widget.unitPrice}',
+                        style: TextStyle(color: Colors.grey[700]),
+                      ),
                     ],
                   ),
                 ),
@@ -107,12 +117,14 @@ class _CartItemTileState extends State<CartItemTile> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                        onPressed: _decrementQuantity,
-                        icon: const Icon(Icons.remove)),
+                      onPressed: _decrementQuantity,
+                      icon: const Icon(Icons.remove),
+                    ),
                     Text('$quantity'),
                     IconButton(
-                        onPressed: _incrementQuantity,
-                        icon: const Icon(Icons.add)),
+                      onPressed: _incrementQuantity,
+                      icon: const Icon(Icons.add),
+                    ),
                   ],
                 ),
               ],
