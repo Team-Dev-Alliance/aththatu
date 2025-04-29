@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',#By Himala
     'filter',#By Himala
+    'accounts', #by Isurika
 ]
 
 MIDDLEWARE = [
