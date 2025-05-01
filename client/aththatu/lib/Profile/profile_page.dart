@@ -29,9 +29,10 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
+
     // Get arguments to check if we need to open a specific tab
-    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final arguments =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     if (arguments != null && arguments.containsKey('initialTab')) {
       _tabController.animateTo(arguments['initialTab']);
     }
@@ -67,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage>
       ),
       body: Column(
         children: [
-          const ProfileHeader(userName: 'Tekashi 6ix9ine'),
+          const ProfileHeader(userName: 'Dulitha Perera'),
           ProfileTabBar(controller: _tabController),
           Expanded(
             child: TabBarView(

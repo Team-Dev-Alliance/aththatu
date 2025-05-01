@@ -381,7 +381,7 @@ class _HomePageState extends State<HomePage>
   Widget _buildHandcraftsVendorList() {
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: 3, // Example: 3 vendor cards
+      itemCount: 4, // Example: 3 vendor cards
       itemBuilder: (context, index) {
         // Different handcrafts vendors
         final List<Map<String, dynamic>> handcraftsVendors = [
@@ -402,6 +402,12 @@ class _HomePageState extends State<HomePage>
             'categories': ['Home Decor', 'Wall Art'],
             'rating': 5,
             'image': 'assets/artisanal.png',
+          },
+          {
+            'name': 'Chathu Clay Pots',
+            'categories': ['Flower Pots', 'Clay crafts'],
+            'rating': 5,
+            'image': 'assets/chathu.png',
           },
         ];
 
@@ -467,7 +473,14 @@ class _HomePageState extends State<HomePage>
                       ),
                       const SizedBox(height: 8),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ShopPage(),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange[700],
                           shape: RoundedRectangleBorder(

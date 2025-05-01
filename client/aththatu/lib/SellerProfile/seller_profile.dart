@@ -14,8 +14,8 @@ class _SellerProfileState extends State<SellerProfile> {
 
   String description = "High-quality clay pots handcrafted with love.";
   List<String> phoneNumbers = ["+1 123 456 7890"];
-  String bannerImageUrl = ""; // Empty for now
-  String profileImageUrl = ""; // Empty for now
+  String bannerImageUrl = "assets/chathu.png"; // Empty for now
+  String profileImageUrl = "assets/chathu_profile.png"; // Empty for now
 
   void _onNavBarTap(int index) {
     setState(() {
@@ -34,24 +34,25 @@ class _SellerProfileState extends State<SellerProfile> {
     final controller = TextEditingController(text: description);
     final newDescription = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Edit Description"),
-        content: TextField(
-          controller: controller,
-          maxLines: 3,
-          decoration: const InputDecoration(labelText: "Store Description"),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Edit Description"),
+            content: TextField(
+              controller: controller,
+              maxLines: 3,
+              decoration: const InputDecoration(labelText: "Store Description"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, controller.text.trim()),
+                child: const Text("Save"),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, controller.text.trim()),
-            child: const Text("Save"),
-          ),
-        ],
-      ),
     );
 
     if (newDescription != null && newDescription.isNotEmpty) {
@@ -65,24 +66,25 @@ class _SellerProfileState extends State<SellerProfile> {
     final controller = TextEditingController();
     final newPhone = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Add Phone Number"),
-        content: TextField(
-          controller: controller,
-          keyboardType: TextInputType.phone,
-          decoration: const InputDecoration(labelText: "Phone Number"),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Add Phone Number"),
+            content: TextField(
+              controller: controller,
+              keyboardType: TextInputType.phone,
+              decoration: const InputDecoration(labelText: "Phone Number"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, controller.text.trim()),
+                child: const Text("Add"),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, controller.text.trim()),
-            child: const Text("Add"),
-          ),
-        ],
-      ),
     );
 
     if (newPhone != null && newPhone.isNotEmpty) {
@@ -112,7 +114,8 @@ class _SellerProfileState extends State<SellerProfile> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pushReplacementNamed(context, '/seller_home'),
+          onPressed:
+              () => Navigator.pushReplacementNamed(context, '/seller_home'),
         ),
         title: const Text('My Profile'),
         backgroundColor: Colors.white,
@@ -136,16 +139,18 @@ class _SellerProfileState extends State<SellerProfile> {
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10),
-                  image: bannerImageUrl.isNotEmpty
-                      ? DecorationImage(
-                          image: NetworkImage(bannerImageUrl),
-                          fit: BoxFit.cover,
-                        )
-                      : null,
+                  image:
+                      bannerImageUrl.isNotEmpty
+                          ? DecorationImage(
+                            image: AssetImage(bannerImageUrl),
+                            fit: BoxFit.cover,
+                          )
+                          : null,
                 ),
-                child: bannerImageUrl.isEmpty
-                    ? const Center(child: Icon(Icons.photo, size: 50))
-                    : null,
+                child:
+                    bannerImageUrl.isEmpty
+                        ? const Center(child: Icon(Icons.photo, size: 50))
+                        : null,
               ),
             ),
             const SizedBox(height: 16),

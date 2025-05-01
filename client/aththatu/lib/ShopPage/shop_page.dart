@@ -15,40 +15,31 @@ class _ShopPageState extends State<ShopPage> {
   // Mock product data
   List<Map<String, dynamic>> products = [
     {
-      'name': 'Clay Pot A',
-      'price': 2500,
+      'name': 'Cacti pot',
+      'price': 250,
       'popularity': 90,
       'dateAdded': DateTime(2025, 4, 1),
-      'images': [
-        'https://via.placeholder.com/300.png?text=Clay+Pot+A+1',
-        'https://via.placeholder.com/300.png?text=Clay+Pot+A+2',
-      ],
-      'description':
-          'Beautiful handmade clay pot A, perfect for plants or decor.',
+      'images': ['assets/cacti_pot.png', 'assets/cacti_pot2.png'],
+      'description': 'Beautiful handmade cacti pot, perfect for plants.',
       'variations': ['Small', 'Medium', 'Large'],
     },
     {
-      'name': 'Clay Pot B',
-      'price': 3000,
+      'name': 'Candle pots',
+      'price': 200,
       'popularity': 75,
       'dateAdded': DateTime(2025, 4, 10),
-      'images': [
-        'https://via.placeholder.com/300.png?text=Clay+Pot+B+1',
-        'https://via.placeholder.com/300.png?text=Clay+Pot+B+2',
-      ],
-      'description': 'Elegant clay pot B with intricate designs.',
+      'images': ['assets/candle_pot.png', 'assets/candle_pot2.png'],
+      'description': 'Elegant candle pot with intricate designs.',
       'variations': ['Medium', 'Large'],
     },
+
     {
-      'name': 'Clay Pot C',
-      'price': 1500,
+      'name': 'Clay Bowl',
+      'price': 275,
       'popularity': 95,
       'dateAdded': DateTime(2025, 3, 25),
-      'images': [
-        'https://via.placeholder.com/300.png?text=Clay+Pot+C+1',
-        'https://via.placeholder.com/300.png?text=Clay+Pot+C+2',
-      ],
-      'description': 'Compact clay pot C, ideal for kitchen herbs.',
+      'images': ['assets/clay_bowl.png', 'assets/clay_bowl2.png'],
+      'description': 'Compact clay bowl, ideal for kitchen herbs.',
       'variations': ['Small', 'Medium'],
     },
   ];
@@ -84,8 +75,8 @@ class _ShopPageState extends State<ShopPage> {
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
                     image: const DecorationImage(
-                      image: NetworkImage(
-                        'https://via.placeholder.com/400x200.png?text=Shop+Banner',
+                      image: AssetImage(
+                        'assets/chathu.png', // Placeholder image
                       ),
                       fit: BoxFit.cover,
                     ),

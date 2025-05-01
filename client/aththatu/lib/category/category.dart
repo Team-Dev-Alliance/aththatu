@@ -26,6 +26,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
     Icons.category_outlined,
   ];
 
+  void _onNavTapped(int index) {
+    setState(() {
+      _currentNavIndex = index;
+      // Add routing here if needed
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,12 +54,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ),
       appBar: const TitleBar(), // Your existing title bar
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF2D2F81), Color(0xFF3B3EAC)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+        decoration: BoxDecoration(
+         color: Colors.yellow[50]
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -67,19 +70,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
             itemBuilder: (context, index) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.green[50],
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.white30),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(icons[index], size: 40, color: Colors.white),
+                    Icon(icons[index], size: 40, color: Colors.black),
                     const SizedBox(height: 10),
                     Text(
                       categories[index],
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.deepPurple,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),

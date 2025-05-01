@@ -38,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // Show loading indicator
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -47,10 +46,7 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-    // Attempt login
     final error = await _authService.signIn(email: email, password: password);
-
-    // Hide loading indicator
     Navigator.of(context).pop();
 
     if (error != null) {
@@ -67,15 +63,14 @@ class _LoginPageState extends State<LoginPage> {
           backgroundColor: Colors.green,
         ),
       );
-      // Navigate to the home page or another screen
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/seller_home');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF003087), // Dark blue background
+      backgroundColor: const Color(0xFFFFF3E0), // Light yellowish background
       body: Center(
         child: SingleChildScrollView(
           child: Center(
@@ -85,8 +80,15 @@ class _LoginPageState extends State<LoginPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 16.0),
                 padding: const EdgeInsets.all(24.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFFFFFBF2), // very light warm beige
                   borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.brown.withOpacity(0.2),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    )
+                  ],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -97,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF003087),
+                        color: Color(0xFF6D4C41), // Brownish
                       ),
                     ),
                     const SizedBox(height: 24),
@@ -106,6 +108,10 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         labelText: 'Enter email to login',
                         labelStyle: const TextStyle(color: Colors.grey),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.orange),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -118,6 +124,10 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         labelText: 'Enter Password',
                         labelStyle: const TextStyle(color: Colors.grey),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.lightGreen),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -135,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton(
                       onPressed: _handleLogin,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF003087),
+                        backgroundColor: const Color(0xFFFF9800), // Orange
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -154,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: const Text(
                           'Don\'t Have an account? SignUp',
-                          style: TextStyle(color: Color(0xFF003087)),
+                          style: TextStyle(color: Colors.orange),
                         ),
                       ),
                     ),
@@ -167,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'PRIVACY POLICY',
                             style: TextStyle(
-                              color: Color(0xFF003087),
+                              color: Colors.brown,
                               fontSize: 12,
                             ),
                           ),
@@ -175,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Text(
                           '|',
                           style: TextStyle(
-                            color: Color(0xFF003087),
+                            color: Colors.brown,
                             fontSize: 12,
                           ),
                         ),
@@ -184,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'TERMS & CONDITIONS',
                             style: TextStyle(
-                              color: Color(0xFF003087),
+                              color: Colors.brown,
                               fontSize: 12,
                             ),
                           ),

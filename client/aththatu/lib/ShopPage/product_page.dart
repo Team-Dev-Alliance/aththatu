@@ -31,7 +31,9 @@ class _ProductPageState extends State<ProductPage> {
 
   void _previousImage() {
     setState(() {
-      _currentImageIndex = (_currentImageIndex - 1 + widget.imageUrls.length) % widget.imageUrls.length;
+      _currentImageIndex =
+          (_currentImageIndex - 1 + widget.imageUrls.length) %
+          widget.imageUrls.length;
     });
   }
 
@@ -52,7 +54,8 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    _selectedVariation = widget.variations.isNotEmpty ? widget.variations[0] : null;
+    _selectedVariation =
+        widget.variations.isNotEmpty ? widget.variations[0] : null;
   }
 
   @override
@@ -73,7 +76,7 @@ class _ProductPageState extends State<ProductPage> {
               child: Stack(
                 children: [
                   Center(
-                    child: Image.network(
+                    child: Image.asset(
                       widget.imageUrls[_currentImageIndex],
                       fit: BoxFit.cover,
                       width: double.infinity,
@@ -106,7 +109,10 @@ class _ProductPageState extends State<ProductPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 widget.productName,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
 
@@ -134,12 +140,13 @@ class _ProductPageState extends State<ProductPage> {
                       _selectedVariation = value;
                     });
                   },
-                  items: widget.variations.map((variation) {
-                    return DropdownMenuItem(
-                      value: variation,
-                      child: Text(variation),
-                    );
-                  }).toList(),
+                  items:
+                      widget.variations.map((variation) {
+                        return DropdownMenuItem(
+                          value: variation,
+                          child: Text(variation),
+                        );
+                      }).toList(),
                 ),
               ),
 
@@ -150,19 +157,13 @@ class _ProductPageState extends State<ProductPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  const Text(
-                    'Quantity:',
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  const Text('Quantity:', style: TextStyle(fontSize: 16)),
                   const SizedBox(width: 16),
                   IconButton(
                     icon: const Icon(Icons.remove_circle_outline),
                     onPressed: _decreaseQuantity,
                   ),
-                  Text(
-                    '$_quantity',
-                    style: const TextStyle(fontSize: 18),
-                  ),
+                  Text('$_quantity', style: const TextStyle(fontSize: 18)),
                   IconButton(
                     icon: const Icon(Icons.add_circle_outline),
                     onPressed: _increaseQuantity,
@@ -184,7 +185,10 @@ class _ProductPageState extends State<ProductPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 15,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),

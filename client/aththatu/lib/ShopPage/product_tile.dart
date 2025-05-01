@@ -25,12 +25,13 @@ class ProductTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ProductPage(
-              productName: name,
-              imageUrls: images,
-              description: description,
-              variations: variations,
-            ),
+            builder:
+                (context) => ProductPage(
+                  productName: name,
+                  imageUrls: images,
+                  description: description,
+                  variations: variations,
+                ),
           ),
         );
       },
@@ -54,10 +55,10 @@ class ProductTile extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
+                child: Image.asset(
                   images.isNotEmpty
                       ? images[0]
-                      : 'https://via.placeholder.com/150.png?text=No+Image',
+                      : 'assets/no_image.png', // Placeholder image if no images are available
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -68,10 +69,7 @@ class ProductTile extends StatelessWidget {
             // Product Name
             Text(
               name,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -81,10 +79,7 @@ class ProductTile extends StatelessWidget {
             // Product Price
             Text(
               'Rs $price',
-              style: const TextStyle(
-                color: Colors.green,
-                fontSize: 14,
-              ),
+              style: const TextStyle(color: Colors.green, fontSize: 14),
             ),
           ],
         ),

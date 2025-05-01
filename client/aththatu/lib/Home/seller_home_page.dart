@@ -15,15 +15,16 @@ class SellerHomePage extends StatefulWidget {
 class _SellerHomePageState extends State<SellerHomePage> {
   int _currentNavIndex = 0; // Home tab selected
   final List<String> _products = [
-    'assets/product1.jpg',
-    'assets/product2.jpg',
-    'assets/product3.jpg',
-    'assets/product4.jpg',
+    'assets/product1.png',
+    'assets/cacti_pot.png',
+    'assets/cart_clay_pot.png',
+    'assets/clay_bowl.png',
   ];
+  
   final List<String> _orders = [
-    'assets/order1.jpg',
-    'assets/order2.jpg',
-    'assets/order3.jpg',
+    'assets/cacti_pot.png',
+    'assets/candle_pot.png',
+    'assets/clay_bowl.png',
   ];
   final AuthService _authService = AuthService();
 
@@ -40,10 +41,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: _handleSignOut,
-          ),
+          IconButton(icon: const Icon(Icons.logout), onPressed: _handleSignOut),
         ],
       ),
       bottomNavigationBar: nav.NavigationBar(
@@ -97,14 +95,14 @@ class _SellerHomePageState extends State<SellerHomePage> {
                               width: 100,
                               height: 100,
                               fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  width: 100,
-                                  height: 100,
-                                  color: Colors.grey[300],
-                                  child: const Icon(Icons.image_not_supported),
-                                );
-                              },
+                              // errorBuilder: (context, error, stackTrace) {
+                              //   return Container(
+                              //     width: 100,
+                              //     height: 100,
+                              //     color: Colors.grey[300],
+                              //     child: const Icon(Icons.image_not_supported),
+                              //   );
+                              // },
                             ),
                           ),
                         );
@@ -124,13 +122,18 @@ class _SellerHomePageState extends State<SellerHomePage> {
                     children: [
                       const Text(
                         'My Orders',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const SellerOrdersPage()),
+                            MaterialPageRoute(
+                              builder: (context) => const SellerOrdersPage(),
+                            ),
                           );
                         },
                         child: const Icon(Icons.arrow_forward_ios, size: 16),
@@ -171,7 +174,10 @@ class _SellerHomePageState extends State<SellerHomePage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0,
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -179,7 +185,9 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const AddProductPage()),
+                          MaterialPageRoute(
+                            builder: (context) => const AddProductPage(),
+                          ),
                         );
                       },
                       style: OutlinedButton.styleFrom(
@@ -204,7 +212,9 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const AnalyticsPage()),
+                          MaterialPageRoute(
+                            builder: (context) => const AnalyticsPage(),
+                          ),
                         );
                       },
                       style: OutlinedButton.styleFrom(
@@ -218,7 +228,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                         children: [
                           Icon(Icons.analytics),
                           SizedBox(width: 8),
-                          Text('Business Analytics'),
+                          Text('Analytics'),
                         ],
                       ),
                     ),

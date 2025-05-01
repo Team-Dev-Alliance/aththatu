@@ -8,28 +8,33 @@ class UserSettingsTab extends StatefulWidget {
 }
 
 class _UserSettingsTabState extends State<UserSettingsTab> {
-  String userName = "Tekashi 6ix9ine";
-  List<String> emails = ["tekashi@example.com"];
-  List<String> phoneNumbers = ["+1 123 456 7890"];
-  List<String> addresses = ["123 Main Street, Brooklyn, NY"];
+  String userName = "Dulitha Perera";
+  List<String> emails = ["tharukadulitha@gmail.com"];
+  List<String> phoneNumbers = ["+94772297936"];
+  List<String> addresses = ["335, Nuwanmaga, Dodangoda"];
 
   void _editName() async {
     final controller = TextEditingController(text: userName);
     final newName = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Edit Name"),
-        content: TextField(
-          controller: controller,
-          decoration: const InputDecoration(labelText: "Name"),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
-          ElevatedButton(
-              onPressed: () => Navigator.pop(context, controller.text),
-              child: const Text("Save"))
-        ],
-      ),
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Edit Name"),
+            content: TextField(
+              controller: controller,
+              decoration: const InputDecoration(labelText: "Name"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, controller.text),
+                child: const Text("Save"),
+              ),
+            ],
+          ),
     );
 
     if (newName != null && newName.trim().isNotEmpty) {
@@ -43,20 +48,25 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
     final controller = TextEditingController();
     final newPhone = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Add Phone Number"),
-        content: TextField(
-          controller: controller,
-          keyboardType: TextInputType.phone,
-          decoration: const InputDecoration(labelText: "Phone Number"),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
-          ElevatedButton(
-              onPressed: () => Navigator.pop(context, controller.text),
-              child: const Text("Add"))
-        ],
-      ),
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Add Phone Number"),
+            content: TextField(
+              controller: controller,
+              keyboardType: TextInputType.phone,
+              decoration: const InputDecoration(labelText: "Phone Number"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, controller.text),
+                child: const Text("Add"),
+              ),
+            ],
+          ),
     );
 
     if (newPhone != null && newPhone.trim().isNotEmpty) {
@@ -70,19 +80,24 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
     final controller = TextEditingController();
     final newAddress = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Add Address"),
-        content: TextField(
-          controller: controller,
-          decoration: const InputDecoration(labelText: "Address"),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
-          ElevatedButton(
-              onPressed: () => Navigator.pop(context, controller.text),
-              child: const Text("Add"))
-        ],
-      ),
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Add Address"),
+            content: TextField(
+              controller: controller,
+              decoration: const InputDecoration(labelText: "Address"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, controller.text),
+                child: const Text("Add"),
+              ),
+            ],
+          ),
     );
 
     if (newAddress != null && newAddress.trim().isNotEmpty) {
@@ -96,20 +111,25 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
     final controller = TextEditingController();
     final newEmail = await showDialog<String>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Add Email"),
-        content: TextField(
-          controller: controller,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(labelText: "Email"),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
-          ElevatedButton(
-              onPressed: () => Navigator.pop(context, controller.text),
-              child: const Text("Add"))
-        ],
-      ),
+      builder:
+          (context) => AlertDialog(
+            title: const Text("Add Email"),
+            content: TextField(
+              controller: controller,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(labelText: "Email"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context, controller.text),
+                child: const Text("Add"),
+              ),
+            ],
+          ),
     );
 
     if (newEmail != null && newEmail.trim().isNotEmpty) {
@@ -139,10 +159,10 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             onPressed: _addEmail,
           ),
         ),
-        ...emails.map((email) => ListTile(
-              title: Text(email),
-              leading: const Icon(Icons.email),
-            )),
+        ...emails.map(
+          (email) =>
+              ListTile(title: Text(email), leading: const Icon(Icons.email)),
+        ),
         const Divider(),
         ListTile(
           title: const Text("Phone Numbers"),
@@ -151,10 +171,10 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             onPressed: _addPhoneNumber,
           ),
         ),
-        ...phoneNumbers.map((phone) => ListTile(
-              title: Text(phone),
-              leading: const Icon(Icons.phone),
-            )),
+        ...phoneNumbers.map(
+          (phone) =>
+              ListTile(title: Text(phone), leading: const Icon(Icons.phone)),
+        ),
         const Divider(),
         ListTile(
           title: const Text("Addresses"),
@@ -163,10 +183,10 @@ class _UserSettingsTabState extends State<UserSettingsTab> {
             onPressed: _addAddress,
           ),
         ),
-        ...addresses.map((addr) => ListTile(
-              title: Text(addr),
-              leading: const Icon(Icons.home),
-            )),
+        ...addresses.map(
+          (addr) =>
+              ListTile(title: Text(addr), leading: const Icon(Icons.home)),
+        ),
       ],
     );
   }

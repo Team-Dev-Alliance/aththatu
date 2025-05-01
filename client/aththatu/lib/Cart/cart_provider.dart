@@ -6,8 +6,8 @@ class CartProvider extends ChangeNotifier {
     {
       'shopName': 'Chathu Clay Pots',
       'productName': 'Cacti Pot, Medium size',
-      'unitPrice': 400.0,
-      'imageUrl': 'assets/cart_clay_pot.png',
+      'unitPrice': 250.0,
+      'imageUrl': 'assets/cacti_pot.png',
       'quantity': 1,
     },
     {
